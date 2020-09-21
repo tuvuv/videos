@@ -1,24 +1,24 @@
-import React from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { Input } from 'antd'
 import '../App.css'
 
 const { Search } = Input
 
-class SearchBar extends React.Component {
-  state = { input: '' }
+const SearchBar = () => {
+  const [input, setInput] = useState('')
 
-  clearInputBar = () => {
-    this.setState({input: ''})
+  const clearInputBar = () => {
+    setInput('')
   }
 
-  handleChange = e => {
-    this.setState({input: e.target.value})
+  const handleChange = e => {
+    setInput(e.target.value)
   }
 
-  render = () => (
+  return (
     <div>
-      <Search value={this.state.input} placeholder="Search videos" onChange={e => this.handleChange(e)} onSearch={term => {this.props.onSearchSubmit(term); this.clearInputBar()}} enterButton />
+      <Search value={input} placeholder="Search videos" onChange={e => this.handleChange(e)} onSearch={term => { this.props.onSearchSubmit(term); this.clearInputBar() }} enterButton />
     </div>
   )
 }
@@ -26,4 +26,5 @@ class SearchBar extends React.Component {
 SearchBar.propTypes = {
   onSearchSubmit: PropTypes.func
 }
+
 export default SearchBar
